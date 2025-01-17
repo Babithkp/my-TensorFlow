@@ -17,8 +17,8 @@ type GLTFResult = GLTF & {
 };
 
 const ActionName = "Take 001";
-type ModelProps = JSX.IntrinsicElements["group"]; 
-export const Model = forwardRef((props: ModelProps, ref: React.Ref<{ flyAnimation: () => void }>) => {
+
+export const Model = forwardRef((props: JSX.IntrinsicElements["group"], ref) => { 
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(
     "/phoenix_bird.glb"
@@ -34,12 +34,12 @@ export const Model = forwardRef((props: ModelProps, ref: React.Ref<{ flyAnimatio
 
       timeline.fromTo(
         group.current.position,
-        { x: 0, z: 0}, // Start off-screen to the right
-        { x: -3000, z: -1000, duration: 3, ease: "power3.out" } // Move to the center
+        { x: 0, z: 0, delay: 3 }, // Start off-screen to the right
+        { x: -3000, z: -1000, duration: 1, ease: "power3.out" } // Move to the center
       );
       timeline.fromTo(
         group.current.position,
-        { x: -3000, z: -1000}, // Start off-screen to the right
+        { x: -3000, z: -1000, delay: 3 }, // Start off-screen to the right
         { x: 3000, z: 1000, duration: 1, ease: "power3.out" } // Move to the center
       );
       timeline.fromTo(
@@ -116,7 +116,5 @@ export const Model = forwardRef((props: ModelProps, ref: React.Ref<{ flyAnimatio
         />
       </EffectComposer>
     </>
-  )
-});
-
-export default Model;
+  );
+})

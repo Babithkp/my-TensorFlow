@@ -1,7 +1,7 @@
 import { Environment } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
-import Model from "../components/Model";
 import { useRef } from "react";
+import { Model } from "../components/Model";
 
 function SetCameraPosition() {
   const { camera } = useThree();
